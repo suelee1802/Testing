@@ -6,6 +6,7 @@ module.exports = defineConfig({
       // implement node event listeners here
     },
 
-    baseUrl : "https://buggy.justtestit.org"
+    baseUrl : "https://buggy.justtestit.org",
+    video : false
   },
 });

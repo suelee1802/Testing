@@ -1,3 +1,5 @@
+/// <reference types="cypress" />
+
 /*
   Scenario : user can move to main page by clicking logo name on the top
 

@@ -1,3 +1,5 @@
+/// <reference types="cypress" />
+
 /*
   Scenario : user move to overall page and type specific number in the page number text, then the page will update
 

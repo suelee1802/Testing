@@ -1,3 +1,5 @@
+/// <reference types="cypress" />
+
 /*
   Scenario : logged in user try to update additional info, and Gender/Age field should be proper data format
 
