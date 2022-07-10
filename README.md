@@ -21,6 +21,14 @@ Testing scripts
 support files
 > /cypress/support/
 
+If you want to see the test on cypress app
+> `npm run cypress:open`
+> Select `E2E Testing` : don't generete sample files
+> Select `Chrome` and click `Start E2E Testing`
+> You can see test list on the `Specs` tab
+> By clicking one of tests, you can start testing
+
+
 If you want to see testing video
 > open cypress.config.js
 > change `video:false` to `video:true`
