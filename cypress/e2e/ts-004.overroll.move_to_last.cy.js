@@ -17,24 +17,14 @@ describe('overroll page will data update when user type page number', () => {
     cy.visit('/')
   })
 
-  //suelee /Test1234!
   it('overRoll Page move to the end by type page max number ', () => {
 
     cy.mainPageFindMenuAndClick('Overall Rating');
     cy.currentLocation('overall')
-    cy.overRollGetMaxPage()
-      .then(maxPage => {
-        cy.overRollNavigatePageByPageNumber(maxPage)
 
-        cy.overRollReadFirstRank()
-          .then(value => {
-            expect(value).eq((maxPage -1) * eachPageItems + 1)
-          })
-        cy.overRollReadLastRank()
-        .then(value => {
-          expect(value).eq(maxPage * eachPageItems)
-        })
-      })
+    cy.overRollGetMaxPage()
+      .overRollNavigatePageByPageNumber()
+      .isPageCorrect()
 
   })
 

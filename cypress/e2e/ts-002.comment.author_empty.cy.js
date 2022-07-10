@@ -12,18 +12,23 @@
 
 
   Comment only possible when log in, so every comment should have its author.
-  Due to the time limit, check 10 comments from top.
+  Due to the waiting time, check 10 comments from top.
+  sample data : 1st pass,2nd fail(Alfa Romeo>Mito)
 */
 
 describe('brand & model detail page shows comment list', () => {
   var models = [
     {
-      make : "c4u1mqnarscc72is013g",
-      brand : "7Cc4u1mqnarscc72is0160"
+      makeId : "c4u1mqnarscc72is013g",
+      makeName : "Lancia",
+      brandId : "7Cc4u1mqnarscc72is0160",
+      brandName : "Rally 037"
     },
     {
-      make : "c4u1mqnarscc72is00ng",
-      brand : "7Cc4u1mqnarscc72is00r0"
+      makeId : "c4u1mqnarscc72is00ng",
+      makeName : "Alfa Romeo",
+      brandId : "7Cc4u1mqnarscc72is00r0",
+      brandName : "Mito"
     },
   ]
 
@@ -33,11 +38,12 @@ describe('brand & model detail page shows comment list', () => {
 
   models.forEach((model, index) => {
 
-    it(`${model.make} > ${model.brand} shows author`, () => {
+    it(`${model.makeName} > ${model.brandName} shows author`, () => {
 
-      cy.visit(`/model/${model.make}%${model.brand}`)
+      cy.buggyCarVisit(`/model/${model.makeId}%${model.brandId}`)
+        .currentLocation(`/model/${model.makeId}%${model.brandId}`)
 
-      //find comment table
+      //find comment cloumn empty
       cy.get('.table>tbody>tr')
         .each((comment, index)=>{
 

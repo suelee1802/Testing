@@ -1,3 +1,5 @@
+
+
 Cypress.Commands.add('mainPageFindMenuAndClick', (mainManuName) => {
   cy.get('.card').contains(mainManuName)
   .siblings('a').click();

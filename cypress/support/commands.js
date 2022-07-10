@@ -25,14 +25,39 @@
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
 
 
-Cypress.Commands.add('currentLocation', (comparePath, isInclude = true) =>{
-  cy.location(('pathname'))
-  .then((path) => {
+Cypress.Commands.add('buggyCarVisit', (locationPath) => {
+  cy.visit(locationPath)
+
+  return cy.location('pathname')
+});
+
+Cypress.Commands.add('currentLocation',{ prevSubject: 'optional'}, (subject,comparePath, isInclude = true) =>{
+  cy.log(subject)
+
+  if(subject != null) {
     if(isInclude) {
-      expect(path).include(comparePath)
+      expect(subject).include(comparePath)
     }
     else {
-      expect(path).equal(comparePath)
+      expect(subject).equal(comparePath)
     }
-  })
+  } else {
+    cy.location(('pathname'))
+    .then((path) => {
+      if(isInclude) {
+        expect(path).include(comparePath)
+      }
+      else {
+        expect(path).equal(comparePath)
+      }
+    })
+}
 })
+
+Cypress.Commands.add('idExists', (id) => {
+  cy.get(`#${id}`).should('exist')
+});
+
+Cypress.Commands.add('idNotExists', (id) => {
+    cy.get(`#${id}`).should('not.exist')
+});

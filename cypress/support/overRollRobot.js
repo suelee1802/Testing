@@ -1,9 +1,13 @@
-Cypress.Commands.add('overRollNavigatePageByPageNumber', (pageNumber) => {
+Cypress.Commands.add('overRollNavigatePageByPageNumber',{ prevSubject: 'optional'}, (prevPageNumber, pageNumber) => {
+
+  var currentPage = prevPageNumber??pageNumber
+
   cy.get('.form-control.input-xs')
     .clear()
-    .type(pageNumber + "{enter}")
+    .type(currentPage + "{enter}")
     .wait(1000)
 
+  return cy.wrap(currentPage)
 });
 
 Cypress.Commands.add('overRollReadFirstRank', () => {
@@ -39,4 +43,19 @@ Cypress.Commands.add('overRollGetMaxPage', () => {
     })
 });
 
+Cypress.Commands.add('isPageCorrect',{ prevSubject: 'optional'}, (prevPage, currentPage) =>{
+  var eachPageItems = 5
+  var pageNumber = prevPage??currentPage
 
+  //cy.overRollNavigatePageByPageNumber(maxPage)
+  cy.log(pageNumber)
+  cy.overRollReadFirstRank()
+    .then(value => {
+      expect(value).eq((pageNumber -1) * eachPageItems + 1)
+    })
+
+  cy.overRollReadLastRank()
+  .then(value => {
+    expect(value).eq(pageNumber * eachPageItems)
+  })
+})

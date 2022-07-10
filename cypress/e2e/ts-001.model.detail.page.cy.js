@@ -11,21 +11,29 @@
    * specification
    * vote section
    * comment field should not exist
+
+   sample data : 1st & second pass, third fail(Lancia>Stratos)
 */
 
 describe('brand & model detail page', () => {
   var models = [
     {
-      make : "c4u1mqnarscc72is013g",
-      brand : "7Cc4u1mqnarscc72is0160"
+      makeId : "c4u1mqnarscc72is013g",
+      makeName : "Lancia",
+      brandId : "7Cc4u1mqnarscc72is0160",
+      brandName : "Rally 037"
     },
     {
-      make : "c4u1mqnarscc72is013g",
-      brand : "7Cc4u1mqnarscc72is0140"
+      makeId : "c4u1mqnarscc72is013g",
+      makeName : "Lancia",
+      brandId : "7Cc4u1mqnarscc72is0140",
+      brandName : "Delta"
     },
     {
-      make : "c4u1mqnarscc72is013g",
-      brand : "7Cc4u1mqnarscc72is0170"
+      makeId : "c4u1mqnarscc72is013g",
+      makeName : "Lancia",
+      brandId : "7Cc4u1mqnarscc72is0170",
+      brandName : "Stratos"
     }
   ]
 
@@ -35,24 +43,25 @@ describe('brand & model detail page', () => {
 
   models.forEach((model, index) => {
 
-    it(`${model.make} > ${model.brand}`, () => {
+    it(`${model.makeName} > ${model.brandName}`, () => {
 
-      cy.visit(`/model/${model.make}%${model.brand}`)
+      cy.buggyCarVisit(`/model/${model.makeId}%${model.brandId}`)
+        .currentLocation(`/model/${model.makeId}%${model.brandId}`)
 
       //find maker logo
-      cy.get('.img-fluid.center-block')
+      cy.modelDetailFindMakeLogo()
 
       //find maker name
-      cy.get('.card-block.text-xs-center')
+      cy.modelDetailFindMakeName()
 
       //find specification
-      cy.contains('.card-block','Specification')
+      cy.modelDetailFindSpecification()
 
       //find vote section
-      cy.contains('.card-block','Votes')
+      cy.modelDetailFindVotes()
 
       //comment field should not exist because it doesn't log in
-      cy.get('#id').should('not.exist')
+      cy.idNotExists('comment')
 
     })
   })

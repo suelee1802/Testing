@@ -18,5 +18,6 @@ import './commands'
 import './mainPageRobot'
 import './overRollRobot'
 import './profileRobot'
+import './modelDetailRobot'
 // Alternatively you can use CommonJS syntax:
 // require('./commands')
